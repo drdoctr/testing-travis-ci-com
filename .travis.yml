@@ -1,0 +1,17 @@
+language: python
+
+python:
+  - 3.6
+
+env:
+  global:
+    # Doctr deploy key for drdoctr/testing-travis-ci-com
+    - secure: "VRirJw/RSfweodanhTKvzfHAwoGrP7NHyVKg8ws5cQh8yA2XfArZI9yeFfg4Ncz3nlfV/w8Ve8Az3DPyFuV59S7bdGIkKVlnk/Dt7BZeVT8jKtuAZypZrPiENJv8/onUKMIGmqbmpiARzAhcfsambtTCuiCNTaE7hbvNZ25gXa6KdJtfJW3gB4NUCSgsWf6ARXqwgn+VfT0cu81iBpPdi25Xu5ZtzQRspb+LAmf9k6PcbKAeyPQ+n3NDPc581Cpd6OgulGAIsQIm7VbgHBUdDx6HqyRbHA1Bfn9Uuebsjx9gMU86efxB6U5tTOFozQoz/p0LS6H3sJcbGDHNzdg0h0ks6aggIGHFOmkavDcVAAUgpoLHMaDZeKnppIex051vzp+vTZj1BxaGERgvQazICiy99xAxpNkkQm1DVnfyzH6U4FeglihJtG/PHLuBs4SON4Q1ew1KALEZpO/0QrC8cBo9FEchoK9QvFYHCgIaHvgwpYviDXFvICrEfQWIEeXPvYnUaebFAKUl5YspXzrjz2A71DcBgosBc0GMYPupK6cU2C+qqfzuAegsIZczjPDyZ9uml/XBt3Z/qYz/lrc7svQw2b9Xkz2zckVmtn7QduPKAAXPL/W34Lc0Oy0BCR0kIWQSmFTWTjNlFjsX6+CKAAARnwzSL8FQGSlKJ6R85Hg="
+
+script:
+  - set -e
+  - date > test
+  - date > test-token
+  - pip install git+https://github.com/drdoctr/doctr.git@dotcom-fixes
+  - doctr deploy --built-docs test-token --token .
+  - doctr deploy --built-docs test .
